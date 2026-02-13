@@ -4,11 +4,10 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .hero{
-   background-image: url('/images/desktop/image-hero.jpg');
+   background-image: url('/loopstudios-landing-page-main/images/desktop/image-hero.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
