@@ -3,40 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine ❤️</title>
+<title>Valentine Special ❤️</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- INTRO -->
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="music/love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Effects -->
+<div class="hearts"></div>
+<div class="snow"></div>
+
+<!-- INTRO SECTION -->
 <section id="intro" class="active">
-    <div class="snow"></div>
-    <div class="hearts"></div>
-    <div class="content">
-        <h1 id="loveText"></h1>
-    </div>
+    <h1 id="loveText">Happy Valentine ❤️</h1>
 </section>
 
-<!-- GALLERY -->
+<!-- GALLERY SECTION -->
 <section id="gallery">
     <div class="frame">
-        <img id="galleryImage" src="" alt="valentine">
+        <img id="galleryImage" src="" alt="Valentine Image">
     </div>
 </section>
 
-<!-- THANK YOU -->
+<!-- ENDING SECTION -->
 <section id="ending">
-    <div class="content">
+    <div>
         <h1>Thank You My Love ❤️</h1>
-        <p>For being my forever Valentine 💕</p>
+        <p>You are my forever and always 💕</p>
     </div>
 </section>
-
-<!-- BACKGROUND MUSIC -->
-<audio id="loveMusic" loop>
-    
-    <source src="/Valentine/music/we live we love we lie - QuickSounds.com.mp3" type="audio/mpeg">
-</audio>
 
 <script src="script.js"></script>
 </body>

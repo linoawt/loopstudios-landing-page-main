@@ -1,137 +1,95 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    /* ===============================
-       LOVE MESSAGES
-    =============================== */
-
-    const loveMessages = [
+    const messages = [
         "Happy Valentine My Love ❤️",
-        "You are my today and all of my tomorrows 💕",
+        "You are my today and tomorrow 💕",
         "Every heartbeat whispers your name 💓",
-        "Forever is not enough with you 💖",
         "You are my greatest blessing ✨",
         "I love you endlessly ❤️"
     ];
 
-    const loveText = document.getElementById("loveText");
     const intro = document.getElementById("intro");
     const gallery = document.getElementById("gallery");
     const ending = document.getElementById("ending");
-
+    const loveText = document.getElementById("loveText");
     const galleryImage = document.getElementById("galleryImage");
-    const frame = document.querySelector(".frame");
+    const music = document.getElementById("bgMusic");
 
-    const heartsContainer = document.querySelector(".hearts");
-    const snowContainer = document.querySelector(".snow");
+    let step = 0;
 
-    const music = document.getElementById("loveMusic");
+    // Play music on first click (browser policy safe)
+    document.body.addEventListener("click", () => {
+        music.play().catch(() => {});
+    }, { once: true });
 
-    let messageIndex = 0;
-    let imageIndex = 1;
-    const totalImages = 15;
+    function nextStep() {
 
-    /* ===============================
-       START MUSIC SAFELY
-    =============================== */
+        // Show Messages
+        if (step < messages.length) {
+            loveText.textContent = messages[step];
+            step++;
+            setTimeout(nextStep, 2500);
+            return;
+        }
 
-    music.play().catch(() => {
-        document.addEventListener("click", function playOnce() {
-            music.play();
-            document.removeEventListener("click", playOnce);
-        });
-    });
-
-    /* ===============================
-       SHOW LOVE MESSAGES
-    =============================== */
-
-    function showMessages() {
-        if (messageIndex < loveMessages.length) {
-            loveText.textContent = loveMessages[messageIndex];
-            messageIndex++;
-            setTimeout(showMessages, 2500);
-        } else {
+        // Switch to Gallery
+        if (step === messages.length) {
             intro.classList.remove("active");
             gallery.classList.add("active");
-            startGallery();
+            step++;
+            setTimeout(nextStep, 1000);
+            return;
         }
-    }
 
-    /* ===============================
-       STABLE GALLERY SLIDESHOW
-    =============================== */
+        // Show Images 1–15
+        const imageNumber = step - messages.length;
 
-    function startGallery() {
+        if (imageNumber >= 1 && imageNumber <= 15) {
 
-        // Show first image immediately
-        galleryImage.src = `img/${imageIndex}.jpg`; // use lowercase .jpg
-        frame.classList.add("show");
-        imageIndex++;
-
-        const slideshow = setInterval(() => {
-
-            if (imageIndex > totalImages) {
-                clearInterval(slideshow);
-                gallery.classList.remove("active");
-                ending.classList.add("active");
-                return;
-            }
-
-            frame.classList.remove("show");
+            galleryImage.classList.remove("show");
 
             setTimeout(() => {
-                galleryImage.src = `img/${imageIndex}.jpg`;
-                frame.classList.add("show");
-                imageIndex++;
-            }, 500);
+                galleryImage.src = `img/${imageNumber}.jpg`;
+                galleryImage.classList.add("show");
+            }, 200);
 
-        }, 3000);
+            step++;
+            setTimeout(nextStep, 3000);
+            return;
+        }
+
+        // Ending
+        gallery.classList.remove("active");
+        ending.classList.add("active");
     }
 
-    showMessages();
+    nextStep();
 
-    /* ===============================
-       HEARTS ANIMATION
-    =============================== */
+    /* Floating Hearts Generator */
+    const heartsContainer = document.querySelector(".hearts");
 
-    function createHeart() {
-        if (!heartsContainer) return;
-
+    setInterval(() => {
         const heart = document.createElement("div");
         heart.classList.add("heart");
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 4 + Math.random() * 4 + "s";
-
+        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
         heartsContainer.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 8000);
-    }
+        setTimeout(() => heart.remove(), 7000);
+    }, 500);
 
-    setInterval(createHeart, 300);
+    /* Snow Generator */
+    const snowContainer = document.querySelector(".snow");
 
-    /* ===============================
-       SNOW ANIMATION
-    =============================== */
-
-    function createSnowflake() {
-        if (!snowContainer) return;
-
+    setInterval(() => {
         const snowflake = document.createElement("div");
         snowflake.classList.add("snowflake");
+        snowflake.textContent = "❄";
         snowflake.style.left = Math.random() * 100 + "vw";
-        snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
-        snowflake.innerText = "❄";
-        snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
-
+        snowflake.style.animationDuration = (3 + Math.random() * 5) + "s";
         snowContainer.appendChild(snowflake);
 
-        setTimeout(() => {
-            snowflake.remove();
-        }, 10000);
-    }
-
-    setInterval(createSnowflake, 200);
+        setTimeout(() => snowflake.remove(), 8000);
+    }, 300);
 
 });
