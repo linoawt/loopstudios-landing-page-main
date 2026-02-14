@@ -90,15 +90,20 @@ function showMessages() {
 /* SHOW IMAGES ONE BY ONE */
 function showImages() {
     if (imageIndex <= 15) {
+        // hide frame for animation
         frame.classList.remove("show");
+
+        // show next image after a short delay
         setTimeout(() => {
-            galleryImage.src = `img/${imageIndex}.JPEG`;
+            galleryImage.src = `img/${imageIndex}.JPEG`; // make sure the filenames match exactly
             frame.classList.add("show");
             imageIndex++;
-        }, 500);
 
-        setTimeout(showImages, 3000);
+            // schedule the next image display
+            showImages();
+        }, 500); // this controls the frame transition delay
     } else {
+        // after last image
         gallery.classList.remove("active");
         ending.classList.add("active");
     }
