@@ -88,28 +88,34 @@ function showMessages() {
 }
 
 /* SHOW IMAGES ONE BY ONE */
+let imageIndex = 1;
+let isGalleryRunning = false; // prevent duplicate loops
+
 function showImages() {
-    if (imageIndex <= 15) {
-        // hide frame for animation
+
+    if (isGalleryRunning) return; // stop if already running
+    isGalleryRunning = true;
+
+    function nextImage() {
+        if (imageIndex > 15) {
+            gallery.classList.remove("active");
+            ending.classList.add("active");
+            return;
+        }
+
         frame.classList.remove("show");
 
-        // show next image after a short delay
         setTimeout(() => {
-            galleryImage.src = `img/${imageIndex}.JPEG`; // make sure the filenames match exactly
+            galleryImage.src = `img/${imageIndex}.JPEG`; // check case sensitivity
             frame.classList.add("show");
             imageIndex++;
 
-            // schedule the next image display
-            showImages();
-        }, 500); // this controls the frame transition delay
-    } else {
-        // after last image
-        gallery.classList.remove("active");
-        ending.classList.add("active");
+            setTimeout(nextImage, 2500); // wait before next image
+        }, 500);
     }
-}
 
-showMessages();
+    nextImage();
+}
 
 /* HEARTS GENERATION */
 function createHeart() {
