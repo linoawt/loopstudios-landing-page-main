@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+/* General Section Styling */
+section {
+    height: 100vh;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+}
+
+.active {
+    display: flex;
+}
+
+/* Intro */
+#intro {
+    background: linear-gradient(135deg, #ff4e88, #ff0066);
+    color: white;
+}
+
+#intro h1 {
+    font-size: 2.5rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Gallery */
+#gallery {
+    background: #fff0f5;
+}
+
+.frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff0f5;
+    width: 90%;
+    max-width: 500px;
+    height: 70vh;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.frame.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Ending */
+#ending {
+    background: linear-gradient(135deg, #ff0066, #800040);
+    color: white;
+}
+
+#ending h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+#ending p {
+    font-size: 1.3rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media(max-width:768px){
+    #intro h1 {
+        font-size: 1.8rem;
+    }
+    #ending h1 {
+        font-size: 2rem;
+    }
+}
+
+
+/* Existing styles remain, just add the following animations */
+
+/* Hearts animation */
+.hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    transform: rotate(45deg);
+    animation: floatHeart 6s linear infinite;
+    opacity: 0.7;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: red;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: 10px;
+    top: 0;
+}
+
+/* Heart floating animation */
+@keyframes floatHeart {
+    0% { transform: translateY(0) rotate(45deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-1000px) rotate(45deg); opacity: 0; }
+}
+
+/* Snow animation */
+.snow {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 15px;
+    user-select: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
