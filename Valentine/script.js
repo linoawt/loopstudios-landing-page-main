@@ -88,31 +88,23 @@ function showMessages() {
 }
 
 /* SHOW IMAGES ONE BY ONE */
-let imageIndex = 1;
-let totalImages = 15;
-
 function showImages() {
-
-    const interval = setInterval(() => {
-
-        if (imageIndex > totalImages) {
-            clearInterval(interval);
-            gallery.classList.remove("active");
-            ending.classList.add("active");
-            return;
-        }
-
+    if (imageIndex <= 15) {
         frame.classList.remove("show");
-
         setTimeout(() => {
-            galleryImage.src = `img/${imageIndex}.jpg`; // USE lowercase .jpg
+            galleryImage.src = `/img/${imageIndex}.JPEG`;
             frame.classList.add("show");
-        }, 400);
+            imageIndex++;
+        }, 500);
 
-        imageIndex++;
-
-    }, 3000); // change image every 3 seconds
+        setTimeout(showImages, 3000);
+    } else {
+        gallery.classList.remove("active");
+        ending.classList.add("active");
+    }
 }
+
+showMessages();
 
 /* HEARTS GENERATION */
 function createHeart() {
