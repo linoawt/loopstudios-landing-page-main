@@ -87,24 +87,31 @@ function showMessages() {
     }
 }
 
-
 /* SHOW IMAGES ONE BY ONE */
+let imageIndex = 1;
+let totalImages = 15;
+
 function showImages() {
-    let imageIndex = 1;
+
     const interval = setInterval(() => {
-        if (imageIndex > 15) {
+
+        if (imageIndex > totalImages) {
             clearInterval(interval);
             gallery.classList.remove("active");
             ending.classList.add("active");
-        } else {
-            frame.classList.remove("show");
-            setTimeout(() => {
-                galleryImage.src = `img/${imageIndex}.JPEG`;
-                frame.classList.add("show");
-                imageIndex++;
-            }, 500);
+            return;
         }
-    }, 3000);
+
+        frame.classList.remove("show");
+
+        setTimeout(() => {
+            galleryImage.src = `img/${imageIndex}.jpg`; // USE lowercase .jpg
+            frame.classList.add("show");
+        }, 400);
+
+        imageIndex++;
+
+    }, 3000); // change image every 3 seconds
 }
 
 /* HEARTS GENERATION */
