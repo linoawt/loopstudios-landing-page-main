@@ -92,7 +92,7 @@ function showImages() {
     if (imageIndex <= 15) {
         frame.classList.remove("show");
         setTimeout(() => {
-            galleryImage.src = `/Valentine/img/${imageIndex}.JPEG`;
+            galleryImage.src = `/img/${imageIndex}.JPEG`;
             frame.classList.add("show");
             imageIndex++;
         }, 500);
